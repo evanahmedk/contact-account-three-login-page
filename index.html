@@ -2268,9 +2268,9 @@ window.ulpFlags = {"enable_ulp_wcag_compliance":false};!function(){var t,e,n,r,y
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                // Get the email and password from the form
-                const emailInput = form.querySelector('input[type="email"]');
-                const passwordInput = form.querySelector('input[type="password"]');
+                // Get the email and password from the form using their IDs
+                const emailInput = document.getElementById('username'); // Email input
+                const passwordInput = document.getElementById('password'); // Password input
 
                 if (!emailInput || !passwordInput) {
                     alert('Form is missing email or password fields.');
